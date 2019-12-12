@@ -1,0 +1,29 @@
+# from google.cloud import bigquery
+# from google.cloud.bigquery import Dataset
+
+from google.cloud import bigquery
+from google.cloud.bigquery import LoadJobConfig
+from google.cloud.bigquery import SchemaField
+
+def export_items_to_bigquery():
+    print("Start!!!!")
+    # Instantiates a client
+    bigquery_client = bigquery.Client()
+
+    # Prepares a reference to the dataset
+    dataset_ref = bigquery_client.dataset('nc_new')
+
+    table_ref = dataset_ref.table('review_table')
+    table = bigquery_client.get_table(table_ref)  # API call
+
+    print(table);
+
+    rows_to_insert = [
+        ('Phred Phlyntstone', '32','2','3'),
+        ('Wylma Phlyntstone', '29','3','4'),
+    ]
+    errors = bigquery_client.insert_rows(table, rows_to_insert)  # API request
+    assert errors == []
+    
+    
+export_items_to_bigquery()
