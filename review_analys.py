@@ -57,6 +57,7 @@ def rewview_insert(date,user_name,review_text,rating,socre,magnitude):
     errors = bigquery_client.insert_rows(table, rows_to_insert)  # API request
     print(errors)
 
+    
 ##시작
 print("시작")
 rewview_select("gogo")
